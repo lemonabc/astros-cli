@@ -1,0 +1,24 @@
+@import "document";
+@import "lib/element";
+.icon .base();
+.icon(@select,@model,@type){
+	.size(@model)when(@model = xs){
+		@size:12;
+		@imgUrl:@select;
+		@imgType:"png";
+		.icon .icon(@select,@model,@size,@imgUrl,@imgType,@type);
+	}
+	.size(@model)when(@model = s){
+		@size:20;
+		@imgUrl:@select;
+		@imgType:"png";
+		.icon .icon(@select,@model,@size,@imgUrl,@imgType,@type);
+	}
+	.size(@model)when(@model = n){
+		@size:28;
+		@imgUrl:@select;
+		@imgType:"png";
+		.icon .icon(@select,@model,@size,@imgUrl,@imgType,@type);
+	}
+	.size(@model);
+}

@@ -1,0 +1,49 @@
+@import "document";
+.main .container .about-aside h3.title {
+	margin-bottom: 0;
+	margin-top:0;
+}
+.about-aside{
+    .about-aside-wrap{
+        position: relative;
+    }
+	width:180px;
+	float: left;
+	border:1px solid #e3e3e3;
+	text-align:left;
+    .cursor{
+        position: absolute;
+        left:0;
+        bottom: 0;
+        width: 177px;
+        height: 41px;
+        border-left: 3px solid #ed5222;
+        background-color: #fafafa;
+    }
+    ul{
+        position: relative;
+        z-index: 10;
+    }
+	h3{
+		height:50px;
+		line-height:50px;
+		padding-left:30px;
+	}
+	li{
+		font-size:14px;
+		// border-left:3px solid #fff;
+		a{
+			display:block;
+			color:#2a2e32;
+			padding-left:40px;
+			padding-top:10px;
+			padding-bottom:10px;
+			background: url("~/img/dian.jpg?v=@{version}") no-repeat 27px center;
+		}
+		&.on a{
+            color: #fe6f43;
+			// border-left:3px solid #fe6f43;
+			// background-color:#fafafa;
+		}
+	}
+}

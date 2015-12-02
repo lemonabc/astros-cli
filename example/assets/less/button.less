@@ -1,0 +1,97 @@
+@import "document";
+.form .btnbase();
+.getbtn(@selector,@size,@type,@btnWidth:0){
+	.selector(@selector) when(@selector = add){
+		@boxShadow:0; //按钮阴影 不需要写0
+		@linear:0;     //按钮渐变背景 传参时加'',不需要写0
+		@bgColor:#1fbdbe;  //按钮背景颜色
+		@txtShadow:0;  //字体阴影 不需要写0
+		@radius:3px;   //按钮圆角
+		@borderW:0; //按钮边线宽度
+		@borderC:none; //按钮边线颜色
+		@fontColor:#fff;  //按钮字体颜色
+		/* hover效果 */
+		@boxShadowHover:0; //按钮阴影 不需要写0
+		@linearHover:0;     //按钮渐变背景 传参时加'',不需要写0
+		@bgColorHover:#1fbdbe;  //按钮背景颜色
+		@txtShadowHover:0;  //字体阴影 不需要写0
+		@borderCHover:none; //按钮边线颜色
+		@fontColorHover:#fff;  //按钮字体颜色
+		
+	}
+	.selector(@selector) when(@selector = date){
+		@boxShadow:0; //按钮阴影 不需要写0
+		@linear:0;     //按钮渐变背景 传参时加'',不需要写0
+		@bgColor:#25abf5;  //按钮背景颜色
+		@txtShadow:0;  //字体阴影 不需要写0
+		@radius:3px;   //按钮圆角
+		@borderW:0; //按钮边线宽度
+		@borderC:none; //按钮边线颜色
+		@fontColor:#fff;  //按钮字体颜色
+		/* hover效果 */
+		@boxShadowHover:0; //按钮阴影 不需要写0
+		@linearHover:0;     //按钮渐变背景 传参时加'',不需要写0
+		@bgColorHover:#25abf5;  //按钮背景颜色
+		@txtShadowHover:0;  //字体阴影 不需要写0
+		@borderCHover:none; //按钮边线颜色
+		@fontColorHover:#fff;  //按钮字体颜色
+	
+	}
+	.selector(@selector);
+
+
+
+	.size(@size) when (@size = s){
+		@fontSize:14px;
+		@width:@btnWidth;
+		@padding:7px 10px 6px 10px;
+	}
+	.size(@size) when (@size = n){
+		@fontSize:16px;
+		@width:@btnWidth;
+		@padding:9px 10px 8px 10px;
+	}
+	.size(@size) when (@size = l){
+		@fontSize:26px;
+		@width:@btnWidth;
+		@padding:7px 20px 7px;
+	}
+	.size(@size);
+
+
+	.type(@type) when (@type = 0){
+	    .btn-@{selector}-@{size}{
+			.text _nospaceitem();
+			.form .btn(@bgColor,@fontColor,@boxShadow,@txtShadow,@borderC,@linear,@width,@padding,@radius,@borderW,@fontSize);
+		}
+		.btn-@{selector}-@{size}:hover{
+			.form .btn(@bgColorHover,@fontColorHover,@boxShadowHover,@txtShadowHover,@borderCHover,@linearHover,@width,@padding,@radius,@borderW,@fontSize);
+		}		
+
+	}
+	.type(@type) when (@type = 1){
+	    .btn-@{selector}-@{size}{
+			.text _nospaceitem();
+			text-align:left;
+			padding-right:5px;
+			.form .btn(@bgColor,@fontColor,@boxShadow,@txtShadow,@borderC,@linear,@width,@padding,@radius,@borderW,@fontSize);
+			
+			i{
+				margin-right:6px;
+				vertical-align:middle;
+				font-size:@fontSize+(@fontSize/2)-1;
+			}
+		}
+		.btn-@{selector}-@{size}:hover{
+			.form .btn(@bgColorHover,@fontColorHover,@boxShadowHover,@txtShadowHover,@borderCHover,@linearHover,@width,@padding,@radius,@borderW,@fontSize);
+		}		
+	}
+	.type(@type);
+	.disabled,.disabled:hover{
+		cursor:default;
+		.form .btn(#ccc,#ececec,inset 0 -4px 0 #ccc);
+		i{
+			cursor:default;
+		}
+	}
+}
