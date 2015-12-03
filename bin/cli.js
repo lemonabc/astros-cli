@@ -16,15 +16,17 @@ if (!process.argv.slice(2).length) {
 
 program
     .command('create [dir]')
-    .option('-n, --name [value]', '项目名称')
+    .option('-n, --appname [value]', '项目名称')
     .description('创建项目')
     .allowUnknownOption()
     .action(function(dir,options) {
-        var name = options.name || 'Astro';
-        var path = dir || '.';
+        var name = options.appname || 'Astro';
+        var path = dir || process.cwd();
         //判断是否存在输入的路径
         if (nodeFs.existsSync(path)) {
+            
             path = nodePath.join(path,name);
+
             if (nodeFs.existsSync(path)){
                 console.error('目录已存在，请更换其他目录或删除此目录');
             }else{
@@ -52,7 +54,7 @@ program
     });
 
 program
-    .command('release [dir]')
+    .command('  [dir]')
     .description('发布目录')
     .action(function(sitePath, options) {
         var release;
