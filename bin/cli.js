@@ -7,7 +7,7 @@ var nodePath = require('path');
 var spawn = require('child_process').spawn;
 var program = require('commander');
 var readline = require('readline');
-var release = require('../lib/release');
+// var release = require('../lib/release');
 var copyDir = require('copy-dir');
 if (!process.argv.slice(2).length) {
     console.error('你没有输入任何命令，是否想输入`astro init`?\n你可以通过 astro -h 获得更信息');
@@ -52,9 +52,20 @@ program
     });
 
 program
-    .command('release')
+    .command('release [dir]')
     .description('发布目录')
     .action(function(sitePath, options) {
+        var release;
+        try{
+            release = require('./sh/release');
+        }catch(e){
+            try{
+                release = require('./node_modules/astros/lib/release');
+            }catch(e){
+                console.error('没有发现astro项目');
+                return;
+            }
+        }
         if (arguments.length < 2 || (typeof sitePath) != 'string') {
             console.error('你可以通过astro release sitePath 发布项目。或者通过help命令获取更多信息');
             return;
