@@ -1,6 +1,6 @@
 {
   "name": "astros-cli",
-  "version": "0.0.3",
+  "version": "0.0.7",
   "main": "index.js",
   "dependencies": {
     "commander": "^2.8.1",
@@ -8,7 +8,8 @@
     "fs-extra": "^0.24.0",
     "file-plus":"^0.0.2",
     "lang-utils":"^0.0.2",
-    "copy-dir":"^0.0.7"
+    "copy-dir":"^0.0.8",
+    "console-prettify":"0.0.2"
   },
   "bin": {
     "astros": "bin/cli.js"
@@ -17,7 +18,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "isunflower",
+  "url" : "https://github.com/lemonabc/astros-cli/issues",
+  "email" : "ilemonabc@qq.com",
+  "author": "lemonabc",
   "license": "ISC",
   "directories": {
     "example": "example"

@@ -1,5 +1,9 @@
 #!/usr/bin/env node
 
+require('console-prettify')({
+    prefix:1
+});
+
 var nodeFs = require('fs');
 var stat = nodeFs.stat;
 var fse = require('fs-extra');
@@ -7,63 +11,74 @@ var nodePath = require('path');
 var spawn = require('child_process').spawn;
 var program = require('commander');
 var readline = require('readline');
+
 // var release = require('../lib/release');
 var copyDir = require('copy-dir');
 if (!process.argv.slice(2).length) {
-    console.error('你没有输入任何命令，是否想输入`astro init`?\n你可以通过 astro -h 获得更信息');
+    console.warn('你没有输入任何命令，是否想输入`astros init`?\n你可以通过 astro -h 获得更信息');
     process.exit(1);
 }
 
 program
     .command('create [dir]')
-    .option('-n, --appname [value]', '项目名称')
+    // .option('-n, --appname [value]', '项目名称')
     .description('创建项目')
     .allowUnknownOption()
-    .action(function(dir,options) {
-        var name = options.appname || 'Astro';
-        var path = dir || process.cwd();
-        //判断是否存在输入的路径
-        if (nodeFs.existsSync(path)) {
-            
-            path = nodePath.join(path,name);
-
-            if (nodeFs.existsSync(path)){
-                console.error('目录已存在，请更换其他目录或删除此目录');
-            }else{
-                nodeFs.mkdirSync(path);
-                var rootPath = nodePath.join(__dirname, '..', 'example');
-                //同步复制
-                copyDir.sync(rootPath,path);
-                console.error('完成');
-            }
-           
-        }else{
-            console.error('路径不存在');
+    .action(function(dir, options) {
+        //path.isAbsolute
+        var path;
+        if (!dir) {
+            path = nodePath.join(process.cwd(), 'astro-project');
+        } else if (nodePath.isAbsolute(dir)) {
+            path = dir;
+        } else {
+            path = nodePath.join(process.cwd(), dir);
         }
-        
+
+        if (nodeFs.existsSync(path)) {
+            console.error('目录 %s 已存在，请更换其他目录或清空此目录', path);
+        } else {
+            nodeFs.mkdirSync(path);
+            var rootPath = nodePath.join(__dirname, '..', 'example');
+            //同步复制
+            console.info('初始化...');
+            copyDir.sync(rootPath, path);
+            console.info('安装依赖...');
+            process.chdir(path);
+            run('npm install', null, function(){
+                console.info('初始化完成 ^_^ ');
+                console.info('项目目录是 %s', path);
+                confirm('是否立即运行服务？(Y/n)', function(y){
+                    if(y){
+                        run('node server');
+                    }
+                })
+            })
+
+        }
     });
 
-program
-    .command('init')
-    .description('初始化项目')
-    .option('-s, --start [value]', '是否提示开启服务', function(val) {
-        return val != 'no' && val != 'false';
-    }, true)
-    .action(function(cmd) {
+// program
+//     .command('init')
+//     .description('初始化项目')
+//     .option('-s, --start [value]', '是否提示开启服务', function(val) {
+//         return val != 'no' && val != 'false';
+//     }, true)
+//     .action(function(cmd) {
 
-    });
+//     });
 
 program
     .command('release [dir]')
     .description('发布目录')
     .action(function(sitePath, options) {
         var release;
-        try{
+        try {
             release = require('./sh/release');
-        }catch(e){
-            try{
+        } catch (e) {
+            try {
                 release = require('./node_modules/astros/lib/release');
-            }catch(e){
+            } catch (e) {
                 console.error('没有发现astro项目');
                 return;
             }
@@ -92,15 +107,15 @@ program.parse(process.argv);
  */
 
 function confirm(msg, callback) {
-  var rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-  });
+    var rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+    });
 
-  rl.question(msg, function (input) {
-    rl.close();
-    callback(/^y|yes|ok|true$/i.test(input));
-  });
+    rl.question(msg, function(input) {
+        rl.close();
+        callback(/^y|yes|ok|true$/i.test(input));
+    });
 }
 
 function run(command, opt, cb) {
