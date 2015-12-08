@@ -1,6 +1,6 @@
 {
   "name": "astros-cli",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "main": "index.js",
   "dependencies": {
     "commander": "^2.8.1",
@@ -27,6 +27,9 @@
   "email" : "ilemonabc@qq.com",
   "author": "lemonabc",
   "license": "ISC",
+  "engines": {
+    "node": ">=4.0"
+  },  
   "directories": {
     "example": "example"
   },
