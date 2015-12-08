@@ -49,7 +49,7 @@ program
             copyDir.sync(rootPath, path);
             console.info('安装依赖...');
             process.chdir(path);
-            run('npm install', null, function(){
+            run((process.platform === "win32" ? "npm.cmd" : "npm")+' install', null, function(){
                 console.info('初始化完成 ^_^ ');
                 console.info('项目目录是 %s', path);
                 confirm('是否立即运行服务？(Y/n)', function(y){
