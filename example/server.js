@@ -1,20 +1,47 @@
+#!/usr/bin/env node
+
 var nodePath = require('path');
 var nodeUtil = require('util');
-// var express = (require('express'));
-var app = (require('express'))();
 
-var pandora = new(require('pandorajs'));
+var util = require('lang-utils');
 
-var appCfg = require('./config/site.js');
-app.set('env', appCfg.env);
+require('console-prettify')({
+    prefix:1
+});
 
-process.env.NODE_ENV = appCfg.env;
+//启动静态服务器
+    console.log('--------------');
+    require('astros');
+
+    astro.setProject(__dirname);
+    astro.listen();
+//启动静态服务器 END
 
 
-pandora.init(app, __dirname);
+//启动Web服务
 
-require('pandora-proxy')(app);
+    var app = (require('express'))();
 
-app.listen(appCfg.port);
+    var pandora = new(require('pandorajs'));
 
-console.log(nodeUtil.format('server is listening on %d', appCfg.port));
+    var appCfg = require('./config/site.js');
+    app.set('env', appCfg.env);
+
+    process.env.NODE_ENV = appCfg.env;
+
+
+    pandora.init(app, __dirname);
+
+    require('pandora-proxy')(app);
+
+    app.listen(appCfg.port);
+
+    var ips = util.getLocalIp();
+
+    console.log(nodeUtil.format('server is listening on %d', appCfg.port));
+    console.log('you can visit with:')
+
+    ips.forEach(function(ip){
+        console.info('  http://%s:%s',ip, appCfg.port);
+    });
+//启动Web服务 END

@@ -1,0 +1,118 @@
+<module:layout/doc>
+	<div class="top-wrap">
+		<div class="header section">
+			<h1 class="logo"></h1>
+			<ul class="nav">
+				<li><a href="#" class="active">首页</a></li>
+				<li><a href="#">快速开始</a></li>
+				<li><a href="#">文档</a></li>
+				<li><a href="#">插件</a></li>
+				<li><a href="#">问题</a></li>
+			</ul>
+		</div>
+		<div class="top-inner section">
+			<h2>What’s Astro!</h2>
+			<p>Astro是一套简洁、高效的前端集成开发环境。工具能做的事，绝不假你之手，尽情享受变成的乐趣吧！</p>
+			<p><span>current version:2.0</span><span>source:git</span></p>
+			<a href="#" class="m-btn btn-define-m">更多发布日志</a>
+		</div>
+	</div>
+	<div class="section">
+		<ul class="index-map">
+			<li><a href="#"><span><img src="$res(~/img/nav-01.jpg)" alt=""></span>模块化开发</a></li>
+			<li><a href="#"><span><img src="$res(~/img/nav-02.jpg)" alt=""></span>图片处理</a></li>
+			<li><a href="#"><span><img src="$res(~/img/nav-03.jpg)" alt=""></span>资源引用</a></li>
+			<li><a href="#"><span><img src="$res(~/img/nav-04.jpg)" alt=""></span>扩展性</a></li>
+			<li><a href="#"><span><img src="$res(~/img/nav-05.jpg)" alt=""></span>一键发布</a></li>
+		</ul>
+	</div>
+	<div class="section01">
+		<div class="section">
+			<img src="$res(~/img/module01.jpg)" alt="">
+			<div class="code">
+				<code></code>
+			</div>
+			<dl class="section-inner">
+				<dt>模块化开发、构建页面更像堆积木</dt>
+				<dd><i class="m-icon i-module01"></i><p>可把页面抽象成独立、可复用的业务模块</p></dd>
+				<dd><i class="m-icon i-module02"></i><p>模块复用率高，利于保证代码一致性，降低维护成本，便于团队协作</p></dd>
+				<dd><i class="m-icon i-module03"></i><p>模块引用及模块之间的套嵌、书写简单、方便</p></dd>
+				<dd><i class="m-icon i-module04"></i><p>模块中，只需声明直接依赖的组件，Astro会自动分析合并，不需再手动维护Gruntfile.js；</p></dd>
+			</dl>
+		</div>
+	</div>
+	<div class="section02">
+		<div class="section">
+			<dl class="section-inner">
+				<dt>图片自动处理程序，释放你的宝贵生产力</dt>
+				<dd><i class="m-icon i-module05"></i><p>切图只需考虑二倍图，Astro会自动生成一倍图</p></dd>
+				<dd><i class="m-icon i-module06"></i><p>自动合成雪碧图，不必再手动拼图、维护ICON坐标</p></dd>
+				<dd><i class="m-icon i-module07"></i><p>开启MD5命名后，图片名称修改后会自动更新，从此和图片、字体版本号说再见</p></dd>
+				<dd><i class="m-icon i-module08"></i><p>Astro支持图片无损压缩、并为自动增加交错属性</p></dd>
+			</dl>
+			<div class="section-temp">
+				<ul class="code-lst">
+					<li>
+						<code></code>
+						<p>开发环境</p>
+					</li>
+					<li>
+						<code></code>
+						<p>生产环境1[未开启MD5]</p>
+					</li>
+					<li>
+						<code></code>
+						<p>生产环境2[开启MD5]</p>
+					</li>
+				</ul>
+				<ul class="img-lst">
+					<li>
+						<img src="$res(~/img/img1.jpg)" alt="">
+						<p>普通图片</p>
+					</li>
+					<li>
+						<img src="$res(~/img/img2.jpg)" alt="">
+						<p>增加交错属性后</p>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="section03">
+		<div class="section">
+			<img src="$res(~/img/module02.png)" alt="">
+			<div class="code">
+				<code></code>
+				<code></code>
+			</div>
+			<dl class="section-inner">
+				<dt>简化资源引用，减少编程之外的思考</dt>
+				<dd><i class="m-icon i-module09"></i><p>编码时，JS和样式中的图片支持均使用相对路径，书写简单</p></dd>
+				<dd><i class="m-icon i-module10"></i><p>还在用字符串拼接JS模板？NO！Astro里，你可以像维护HTML一样维护JS模板支持base 64资源内嵌</p></dd>
+				<dd><i class="m-icon i-module11"></i><p>支持base 64资源内嵌</p></dd>
+			</dl>
+		</div>
+	</div>
+	<div class="section04">
+		<div class="section">
+			<dl class="section-inner">
+				<dt>一行命令完成发布，自动化流程也很简单</dt>
+				<dd>开发过程中，不仅没有各种维护依赖关系、引用路径的纷扰，发布也可以一键无忧。<br>通过一行命令，就可完成发布、打包，期间自动对图片、JS、CSS进行压缩。在Linux中，通过和sh命令结合，可完美实现发布、打包、上线的自动化提测/上线流程。</dd>
+			</dl>
+			<img src="$res(~/img/module03.jpg)" alt="">
+		</div>
+	</div>
+	<div class="section05">
+		<div class="section">
+			<img src="$res(~/img/module04.png)" alt="">
+			<dl class="section-inner">
+				<dt>如果Astro还不能满足你，那么...</dt>
+				<dd>Astro不仅提供了丰富、便利的内置功能。同时通过对开发流程进行整理，把资源的请求过程抽象为请求资源——分析请求——读取资源文件——解析资源文件——返回请求内容几个步骤，并在各个环节开放了诸多接口。<br>
+你可以在“分析请求”环节，实现自定义URL规则。在“资源预解析"阶段，可增加支持CoffeeScript语法和AMD协议的支持，可以在”返回请求内容“阶段，加入对JS、CSS的验证等。从而让Astro满足你的各种需求。</dd>
+			</dl>
+		</div>
+	</div>
+	<div class="section06">
+			<a href="#" class="m-btn btn-define-l">立即开始</a>
+	</div>
+</module>

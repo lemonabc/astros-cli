@@ -1,3 +1,4 @@
+@import "lib/reset"; 
 /**
 element是页面基本元素的方法集.
 
@@ -11,21 +12,21 @@ element是页面基本元素的方法集.
 **/
 
 
-.icon{
+#icon{
 
     /**
-        .icon 代表所有icon的类的命名空间，它内部提供了所有ICON的设置、调用等方法，ICON使用时，HTML严格遵守以下形式：
+        #icon 代表所有icon的类的命名空间，它内部提供了所有ICON的设置、调用等方法，ICON使用时，HTML严格遵守以下形式：
 
             <i class="m-icon i-selector-size"></i>
             
 
         select{
-            .icon .base(error,20,'~/img/icon','png')//无hover
-            .icon .base(error,20,'~/img/icon','png',1)// 有hover
+            #icon .base(error,20,'../../img/icon','png')//无hover
+            #icon .base(error,20,'../../img/icon','png',1)// 有hover
         }
         @author zhouyu
         @module element
-        @class .icon
+        @class #icon
         @param {String} @select icon名字
         @param {String} @size icon尺寸
         @param {String} @imgUrl 图片名字
@@ -34,55 +35,51 @@ element是页面基本元素的方法集.
     **/
     .base(){
         .m-icon{
-            .display .inline-block();
+			font-family: @iconFont;
+			speak: none;
+			font-style: normal;
+			font-weight: normal;
+			font-variant: normal;
+			line-height:1;
+			text-transform: none;
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
+			vertical-align:middle;
+            #display .inline-block();
             background-repeat: no-repeat;
-            vertical-align:middle;
-            font-size:0;
-            line-height:0;
+            cursor: pointer;
         }
-
-    }
-    .icon(@select,@model,@size,@imgUrl,@imgType,@type){
-        .i-@{select}-@{model}{
-            .bg .img("~/img/sprite/icon/@{imgUrl}", @imgType);
-            background-repeat: no-repeat;
-            .box .square(@size); 
-        }
-        .hover(@size,@type)when(@type = 1){
-            .i-@{select}-@{model}:hover,.i-@{select}-@{model}.hover{
-                @imgUrlHover:~'@{imgUrl}-Hover';
-                .bg .img("~/img/sprite/icon/@{imgUrlHover}", @imgType);
-            }
-        }
-        .hover(@size,@type);
+        // .hover(@size,@type)when(@type = 1){
+        //     .i-@{select}-@{size}:hover,.i-@{select}-@{size}.hover{
+        //         @imgUrlHover:~'@{imgUrl}Hover';
+        //         #bg .img(@imgUrlHover, @imgType);
+        //     }
+        // }
+        // .hover(@size,@type);
     }
 }
-
-
-
-
 /**
-    .form 代表所有表单元素的类的命名空间，它内部提供了button,input...的基础方法
+    #form 代表所有表单元素的类的命名空间，它内部提供了button,input...的基础方法
 
     @author zhouyu
     @module element
-    @class .form
+    @class #form
 
     .btn 为button的基础类
     .input 为input的基础类
 **/    
 
-.form{
+#form{
 
 
     /**
         button调用时严格遵守以下形式：
 
-        .form .btn(submit,0,'center top , #00b5e5, #008db2',0,100px,3px 10px,10px,0,#ececec,#ccc,#000,12px);            
+        #form .btn(submit,0,'center top , #00b5e5, #008db2',0,100px,3px 10px,10px,0,#ececec,#ccc,#000,12px);            
 
         @author zhouyu
         @module element
-        @class .icon
+        @class #icon
         @param {String} @selector 按钮名字
         @param {String} @boxShadow 按钮阴影 不需要写0
         @param {String} @linear 按钮渐变背景 传参时加'',不需要写0
@@ -97,52 +94,61 @@ element是页面基本元素的方法集.
     **/
     .btnbase(){
         .m-btn{
-            .display .inline-block();
+            #display .inline-block();
             vertical-align: middle;
             text-align:center;
-            cursor: pointer;
-            outline: none;
             overflow: visible;
-            width: auto;
-            *width:1; 
-            .box .sizing(content-box);      
+            // #box .sizing(content-box);      
+        }
+        button::-moz-focus-inner,
+        input[type="button"]::-moz-focus-inner {
+            border:none; padding:0;
+        }
+        button, input[type="reset"], input[type="button"], input[type="submit"] {
+            line-height:normal !important;
+        }
+        input,button {
+            -moz-padding-start:npx;
+            -moz-padding-end:npx;
         }
 
     }
-    .btn(@bgColor:none,@fontColor:none,@boxShadow:none,@txtShadow:none,@borderC:none,@linear:none,@width:auto,@padding:none,@radius:none,@borderW:none,@fontSize:none){
-        // button::-moz-focus-inner,
-        // input[type="button"]::-moz-focus-inner {
-        //     border:none; padding:0;
-        // }
-        // button, input[type="reset"], input[type="button"], input[type="submit"] {
-        //     line-height:normal !important;
-        // }
-        // input,button {
-        //     -moz-padding-start:npx;
-        //     -moz-padding-end:npx;
-        // }
-            min-width:@width;
-            *width:@width;
+    .btn(@width,@height,@padding,@radius:none,@fontSize:none,@borderW:none,@bgColor:none,@fontColor:none,@borderC:none,@bgHoverColor:none,@fontHoverColor:none,@borderHoverC:none,@boxShadow:none,@txtShadow:none,@linear:none){
+            display:block;
+            width:@width;
+            height:@height;
             padding:@padding;
-            .box .radius(@radius);
-            .box .shadow(@boxShadow);
+            #box .radius(@radius);
+            #box .shadow(@boxShadow);
             border:@borderW @borderC solid;
-            .bg .color(@bgColor);
-            .bg .linear(@linear);
+            #bg .color(@bgColor);
+            #bg .linear(@linear);
             color:@fontColor;
             text-shadow:@txtShadow;
             font-size:@fontSize;
+            vertical-align: middle;
+            &:hover,&:focus{
+                color:@btnTxtHoverColor;
+                background-color: @btnBgHoverColor;
+                border-color:@borderHoverC;
+            }
+            &.disabled,
+            &:disabled{
+                color:@disbtnTxtColor;
+                background-color: @disbtnBgColor;
+                border-color:@disbtnBorderColor;
+            }
     }
 
 
     /**
         input调用时严格遵守以下形式：
 
-        .form .input(55px,30px,3px 10px,#dfdddd,1px,#fff,12px,0 1px 0 #ececec inset,4px);            
+        #form .input(55px,30px,3px 10px,#dfdddd,1px,#fff,12px,0 1px 0 #ececec inset,4px);            
 
         @author zhouyu
         @module element
-        @class .icon
+        @class #icon
         @param {String} @width 宽度
         @param {String} @height 高
         @param {String} @padding 
@@ -153,44 +159,25 @@ element是页面基本元素的方法集.
         @param {String} @shadow input阴影
         @param {String} @radius 圆角
     **/    
-    .input(@width,@height,@padding,@borderColor,@borderW,@bgColor,@fontSize,@color,@shadow,@radius){
+    .input(@width:55px,@height:30px,@padding,@borderColor:#dfdddd,@borderW:1px,@bgColor,@fontSize:12px, @color:#555,
+@shadow:0 1px 0 #ececec inset,@radius:4px){
         .m-ipt{
             border:@borderColor @borderW solid;
-            .box .shadow(@shadow);
+            #box .shadow(@shadow);
             font-size:@fontSize;
             background: @bgColor;
-            .display .inline-block();
+            #display .inline-block();
             vertical-align:middle;
-            .box .radius(@radius);
+            #box .radius(@radius);
+            width:@width;
             height:@height;
             padding:@padding;
             color:@color;
-            width:@width;
+            &.disabled,&:disabled{
+                #bg .color(@inputBgDiscolor);
+                color:@inputBorderDisColor;
+            }
         }
     }
 }
-.image(@radius:4px,@boxShadow:0){
-        .box .radius(@radius);
-        .box .shadow(@boxShadow);
-}
 
-
-// 翻页基本方法
-.pagin(@radius:4px,@margin:0 3px,@fontSize:12px,@fontColor){
-    .text .nospacewrap();
-    a,.prev,.next,.now,.more,.skip{
-        .text .nospaceitem();
-        margin: @margin;
-        text-valign:top;
-    }
-    a,.prev,.next,.now,.more{
-        .box .radius(@radius);
-        font-size:@fontSize;
-    }
-    a:hover{
-        text-decoration: none;
-    }
-    span.prev,span.next{
-        color: @fontColor;
-    }
-}
