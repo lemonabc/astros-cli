@@ -54,7 +54,7 @@ program
     });
 
 program
-    .command('  [dir]')
+    .command('release [dir]')
     .description('发布目录')
     .action(function(sitePath, options) {
         var release;
