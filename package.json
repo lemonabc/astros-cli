@@ -1,6 +1,6 @@
 {
   "name": "astros-cli",
-  "version": "0.0.9",
+  "version": "0.0.11",
   "main": "index.js",
   "dependencies": {
     "commander": "^2.8.1",
@@ -23,9 +23,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "url" : "https://github.com/lemonabc/astros-cli/issues",
+  "repository": "lemonabc/astros-cli",
   "email" : "ilemonabc@qq.com",
-  "author": "lemonabc",
+  "author": "lemonabc <ilemonabc@qq.com>",
   "license": "ISC",
   "engines": {
     "node": ">=4.0"
