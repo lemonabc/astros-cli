@@ -8,10 +8,11 @@
     "fs-extra": "^0.24.0",
     "file-plus":"^0.0.2",
     "lang-utils":"^0.0.2",
-    "copy-dir":"^0.0.7"
+    "copy-dir":"^0.0.7",
+    "console-prettify":"^0.0.2"
   },
   "bin": {
-    "astros": "bin/cli.js"
+    " ": "bin/cli.js"
   },
   "devDependencies": {},
   "scripts": {

@@ -7,6 +7,7 @@ var nodePath = require('path');
 var spawn = require('child_process').spawn;
 var program = require('commander');
 var readline = require('readline');
+require('console-prettify')();
 // var release = require('../lib/release');
 var copyDir = require('copy-dir');
 if (!process.argv.slice(2).length) {
@@ -54,16 +55,18 @@ program
     });
 
 program
-    .command('release [dir]')
+    .command('build [dir]')
     .description('发布目录')
     .action(function(sitePath, options) {
+        var sitePath = sitePath || nodePath.join(process.cwd());
         var release;
         try{
-            release = require('./sh/release');
+            release = require(nodePath.join(process.cwd(),'sh/builder'));
         }catch(e){
             try{
-                release = require('./node_modules/astros/lib/release');
+                release = require(nodePath.join(process.cwd(),'node_modules/astros/lib/builder'));
             }catch(e){
+                console.error(e);
                 console.error('没有发现astro项目');
                 return;
             }
@@ -80,8 +83,10 @@ program
 
         cfgFile.root = sitePath;
         cfgFile.name = cfgFile.name || 'default';
-
-        release(cfgFile);
+        var b = new release(cfgFile);
+        b.build(function(){
+            console.log('发布成功');
+        })
     });
 
 program.parse(process.argv);
