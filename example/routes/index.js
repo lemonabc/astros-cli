@@ -1,6 +1,8 @@
-var router = require('express').Router(); // 新建一个 router
+var router = require('express').Router();
+
 router.get('/', function(req, res) {
-    res.render('index', {
+    res.render('home', {
+        pageName:'home',
         title:'首页'
     }, function(err, html){
         res.set('Content-Type', 'text/html');
