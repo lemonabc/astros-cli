@@ -11,11 +11,9 @@ var nodePath = require('path');
 var spawn = require('child_process').spawn;
 var program = require('commander');
 var readline = require('readline');
-<<<<<<< HEAD
-require('console-prettify')();
-=======
 
->>>>>>> origin/master
+require('console-prettify')();
+
 // var release = require('../lib/release');
 var copyDir = require('copy-dir');
 if (!process.argv.slice(2).length) {
@@ -78,7 +76,6 @@ program
     .action(function(sitePath, options) {
         var sitePath = sitePath || nodePath.join(process.cwd());
         var release;
-<<<<<<< HEAD
         try{
             release = require(nodePath.join(process.cwd(),'sh/builder'));
         }catch(e){
@@ -86,14 +83,6 @@ program
                 release = require(nodePath.join(process.cwd(),'node_modules/astros/lib/builder'));
             }catch(e){
                 console.error(e);
-=======
-        try {
-            release = require('./sh/release');
-        } catch (e) {
-            try {
-                release = require('./node_modules/astros/lib/release');
-            } catch (e) {
->>>>>>> origin/master
                 console.error('没有发现astro项目');
                 return;
             }
