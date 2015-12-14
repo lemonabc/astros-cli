@@ -1,6 +1,7 @@
 {
   "name": "astros-cli",
-  "version": "0.0.11",
+  "version": "0.0.12",
+  "_version": "0.0.12",
   "main": "index.js",
   "dependencies": {
     "commander": "^2.8.1",
@@ -8,16 +9,11 @@
     "fs-extra": "^0.24.0",
     "file-plus":"^0.0.2",
     "lang-utils":"^0.0.2",
-<<<<<<< HEAD
-    "copy-dir":"^0.0.7",
-    "console-prettify":"^0.0.2"
-=======
-    "copy-dir":"^0.0.8",
-    "console-prettify":"0.0.2"
->>>>>>> origin/master
+    "console-prettify":"^0.0.2",
+    "copy-dir":"^0.0.8"
   },
   "bin": {
-    " ": "bin/cli.js"
+    "astros": "bin/cli.js"
   },
   "devDependencies": {},
   "scripts": {

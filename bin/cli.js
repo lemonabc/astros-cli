@@ -11,21 +11,17 @@ var nodePath = require('path');
 var spawn = require('child_process').spawn;
 var program = require('commander');
 var readline = require('readline');
-<<<<<<< HEAD
 require('console-prettify')();
-=======
 
->>>>>>> origin/master
-// var release = require('../lib/release');
 var copyDir = require('copy-dir');
 if (!process.argv.slice(2).length) {
-    console.warn('你没有输入任何命令，是否想输入`astros init`?\n你可以通过 astro -h 获得更信息');
+    console.warn('你没有输入任何命令，是否想输入`astros create`?\n 你可以通过 astro -h 获得更信息');
     process.exit(1);
 }
 
 program
+    .version(require('../package.json').version)
     .command('create [dir]')
-    // .option('-n, --appname [value]', '项目名称')
     .description('创建项目')
     .allowUnknownOption()
     .action(function(dir, options) {
@@ -57,7 +53,7 @@ program
                         run('node server');
                     }
                 })
-            })
+            });
 
         }
     });
@@ -77,35 +73,28 @@ program
     .description('发布目录')
     .action(function(sitePath, options) {
         var sitePath = sitePath || nodePath.join(process.cwd());
-        var release;
-<<<<<<< HEAD
-        try{
-            release = require(nodePath.join(process.cwd(),'sh/builder'));
-        }catch(e){
-            try{
-                release = require(nodePath.join(process.cwd(),'node_modules/astros/lib/builder'));
-            }catch(e){
-                console.error(e);
-=======
-        try {
-            release = require('./sh/release');
-        } catch (e) {
-            try {
-                release = require('./node_modules/astros/lib/release');
-            } catch (e) {
->>>>>>> origin/master
-                console.error('没有发现astro项目');
-                return;
-            }
-        }
-        if (arguments.length < 2 || (typeof sitePath) != 'string') {
-            console.error('你可以通过astro release sitePath 发布项目。或者通过help命令获取更多信息');
-            return;
-        }
         var stat = tryStat(sitePath);
         if (!stat) {
-            console.error('站点 ' + sitePath + ' 不存在');
-        }
+            console.error('站点 %s 不存在', sitePath);
+            return;
+        }        
+        try{
+            var b = nodePath.join(sitePath, 'sh', 'build.js');
+            stat = tryStat(b);
+            console.log(123);
+            if(stat && stat.isFile()){
+                run('node ' + b, null, function(){
+                    console.log('发布成功');
+                });
+                return;
+            }
+        }catch(e){}
+
+        var release;
+        release = require(nodePath.join(sitePath, 'node_modules', 'astros')).builder;
+
+
+
         var cfgFile = require(nodePath.join(sitePath, 'config', 'static.js'));
 
         cfgFile.root = sitePath;
