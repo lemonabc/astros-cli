@@ -1,8 +1,7 @@
 {
   "name": "astros-cli",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "_version": "0.0.12",
-  "main": "index.js",
   "dependencies": {
     "commander": "^2.8.1",
     "async": "^1.4.2",

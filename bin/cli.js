@@ -11,6 +11,7 @@ var nodePath = require('path');
 var spawn = require('child_process').spawn;
 var program = require('commander');
 var readline = require('readline');
+
 require('console-prettify')();
 
 var copyDir = require('copy-dir');
@@ -58,16 +59,6 @@ program
         }
     });
 
-// program
-//     .command('init')
-//     .description('初始化项目')
-//     .option('-s, --start [value]', '是否提示开启服务', function(val) {
-//         return val != 'no' && val != 'false';
-//     }, true)
-//     .action(function(cmd) {
-
-//     });
-
 program
     .command('build [dir]')
     .description('发布目录')
@@ -81,7 +72,6 @@ program
         try{
             var b = nodePath.join(sitePath, 'sh', 'build.js');
             stat = tryStat(b);
-            console.log(123);
             if(stat && stat.isFile()){
                 run('node ' + b, null, function(){
                     console.log('发布成功');
@@ -92,8 +82,6 @@ program
 
         var release;
         release = require(nodePath.join(sitePath, 'node_modules', 'astros')).builder;
-
-
 
         var cfgFile = require(nodePath.join(sitePath, 'config', 'static.js'));
 
