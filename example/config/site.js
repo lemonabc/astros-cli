@@ -5,7 +5,7 @@ module.exports = {
     // env: 'development',
     // 项目名称
     name: 'astro',
-    // 服务器端口
+    // web服务端口
     port: 3100,
     // 站点根目录
     root: require('path').join(__dirname, '..'),
@@ -24,7 +24,7 @@ module.exports = {
     autoAssets: false,
     // 模板全局属性
     globalVariables: {
-        cdn: 'http://127.0.0.1:3201',
+        // cdn: 'http://127.0.0.1:3201',
         // 静态资源版本号
         ver: function() {
             return Date.now;

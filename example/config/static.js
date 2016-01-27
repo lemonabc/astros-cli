@@ -1,8 +1,9 @@
 // 静态资源服务器配置
 module.exports = {
     // debug: true,
-    // 站点根目录
+    // 静态服务端口
     port: 3201,
+    // 站点根目录
     root: require('path').join(__dirname, '..'),
     // 页面存储路径
     // page: require('path').join(__dirname, '..', 'pages'),
@@ -22,7 +23,7 @@ module.exports = {
     jsImgRefer : {
         rule : '$.res(.__path__.)'
     },
-    jsTpl: "$addRes('{name}','{file}','{content}')",
+    jsTpl: "$addRes({name},{file},{content})",
     // 是否压缩CSS
     // compressCss:true,
     // 是否压缩JS
@@ -36,7 +37,7 @@ module.exports = {
         unCombine: ['jquery', 'mo', 'zepto']
     },
     // 引用的插件，根据书写顺序加载
-    hook: [
+    middlewares: [
         'astros-asset-parse',
         'astros-resource-refer',
         'astros-webcom-refer',
@@ -54,7 +55,7 @@ module.exports = {
         // 发布时需要忽略的目录
         ignore: ['jslib', 'less'],
         // 发布时需要加载的插件，开发、调试时不会加载
-        hook: [
+        middlewares: [
             // 解析资源
             'astros-asset-parse',
             // 解析页面引用了哪些Web组件
