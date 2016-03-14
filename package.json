@@ -1,7 +1,6 @@
 {
   "name": "astros-cli",
-  "version": "0.0.14",
-  "_version": "0.0.13",
+  "version": "0.0.16",
   "dependencies": {
     "commander": "^2.8.1",
     "async": "^1.4.2",

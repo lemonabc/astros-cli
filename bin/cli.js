@@ -83,7 +83,15 @@ program
         var release;
         release = require(nodePath.join(sitePath, 'node_modules', 'astros')).builder;
 
-        var cfgFile = require(nodePath.join(sitePath, 'config', 'static.js'));
+        // 判断是否存在 static.js
+        var cfgFile;
+        try{
+            cfgFile = require(nodePath.join(sitePath, 'config', 'static-build.js'));
+        }catch(error){
+            // 兼容老项目
+            cfgFile = require(nodePath.join(sitePath, 'config', 'static.js'));
+            cfgFile.middlewares = cfgFile.rel.middlewares || [];
+        }
 
         cfgFile.root = sitePath;
         cfgFile.name = cfgFile.name || 'default';
