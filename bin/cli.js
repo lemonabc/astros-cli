@@ -37,7 +37,7 @@ program
         }
 
         if (nodeFs.existsSync(path)) {
-            console.error('目录 %s 已存在，请更换其他目录或清空此目录', path);
+            console.error('目录 %s 已存在，请更换其他目录或删除此目录', path);
         } else {
             nodeFs.mkdirSync(path);
             var rootPath = nodePath.join(__dirname, '..', 'example');
@@ -116,7 +116,7 @@ function confirm(msg, callback) {
 
     rl.question(msg, function(input) {
         rl.close();
-        callback(/^y|yes|ok|true$/i.test(input));
+        callback(input == '' || /^y|yes|ok|true$/i.test(input));
     });
 }
 
