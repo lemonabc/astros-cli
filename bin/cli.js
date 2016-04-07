@@ -3,7 +3,7 @@
 require('console-prettify')({
     prefix:1
 });
-
+const downloadUrl = 'https://github.com/lemonabc/astros-example/archive/create-stable.tar.gz'
 var nodeFs = require('fs');
 var stat = nodeFs.stat;
 var fse = require('fs-extra');
@@ -40,21 +40,51 @@ program
             console.error('目录 %s 已存在，请更换其他目录或删除此目录', path);
         } else {
             nodeFs.mkdirSync(path);
+            var dataFile = nodePath.join(path, '_package.tar.gz');
+            nodeFs.writeFileSync(dataFile,' ');
+
             var rootPath = nodePath.join(__dirname, '..', 'example');
             //同步复制
             console.info('初始化...');
-            copyDir.sync(rootPath, path);
-            console.info('安装依赖...');
-            process.chdir(path);
-            run((process.platform === "win32" ? "npm.cmd" : "npm")+' install', null, function(){
-                console.info('初始化完成 ^_^ ');
-                console.info('项目目录是 %s', path);
-                confirm('是否立即运行服务？(Y/n)', function(y){
-                    if(y){
-                        run('node server');
-                    }
-                })
+            //git下载最新项目
+            console.log('正在下载：%s', downloadUrl);
+
+            var file = nodeFs.createWriteStream(dataFile);
+             
+            file.on('finish', function(){
+                console.log('正在解压...');
+                require('tar.gz')().extract(dataFile, path)
+                    .then(function(err) {
+                        if (err) {
+                            throw err;
+                        }
+                        setTimeout(function(){
+                            require('copy-dir').sync(nodePath.join(path, 'astros-example-create-stable'), 
+                                path);
+                            fse.remove(nodePath.join(path, 'astros-example-create-stable'));
+                            fse.remove(dataFile);
+                            console.log('项目创建完成 ^_^');
+                            console.info('站点目录为%s ', path);
+                            console.info('安装依赖...');
+                            process.chdir(path);
+                            run((process.platform === "win32" ? "npm.cmd" : "npm")+' install', null, function(){
+                                console.info('初始化完成 ^_^ ');
+                                console.info('项目目录是 %s', path);
+                                confirm('是否立即运行服务？(Y/n)', function(y){
+                                    if(y){
+                                        run('node server');
+                                    }
+                                })
+                            });
+
+                        }, 3000)
+                    });
             });
+
+            var rst =  require('request')(downloadUrl)
+            rst.pipe(file);
+            // //
+
 
         }
     });

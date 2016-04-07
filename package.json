@@ -2,14 +2,16 @@
   "name": "astros-cli",
   "version": "0.0.17",
   "dependencies": {
-    "commander": "^2.8.1",
     "async": "^1.4.2",
+    "commander": "^2.8.1",
+    "console-prettify": "^0.0.2",
+    "copy-dir": "^0.0.8",
+    "file-plus": "^0.0.2",
     "fs-extra": "^0.24.0",
-    "file-plus":"^0.0.2",
-    "lang-utils":"^0.0.2",
-    "console-prettify":"^0.0.2",
-    "copy-dir":"^0.0.8",
-    "nodegrass":"^0.0.3"
+    "lang-utils": "^0.0.2",
+    "nodegrass": "^0.0.3",
+    "request": "^2.70.0",
+    "tar.gz": "^1.0.3"
   },
   "bin": {
     "astros": "bin/cli.js"
@@ -19,12 +21,12 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": "lemonabc/astros-cli",
-  "email" : "ilemonabc@qq.com",
+  "email": "ilemonabc@qq.com",
   "author": "lemonabc <ilemonabc@qq.com>",
   "license": "ISC",
   "engines": {
     "node": ">=4.0"
-  },  
+  },
   "directories": {
     "example": "example"
   },
