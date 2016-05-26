@@ -91,8 +91,12 @@ program
 
 program
     .command('build [dir]')
+    .option('-h, --html', '发布html页面')
     .description('发布目录')
     .action(function(sitePath, options) {
+
+        
+
         var sitePath = sitePath || nodePath.join(process.cwd());
         var stat = tryStat(sitePath);
         if (!stat) {
@@ -125,10 +129,24 @@ program
 
         cfgFile.root = sitePath;
         cfgFile.name = cfgFile.name || 'default';
+
+       
+
+        if (options.html) {
+            var releaseHTML = require(nodePath.join(sitePath, 'node_modules', 'astros')).builderHTML;
+            var b = new releaseHTML(cfgFile);
+            b.build(function(){
+                console.log('发布成功');
+            })
+            return;
+        }
         var b = new release(cfgFile);
         b.build(function(){
             console.log('发布成功');
         })
+
+
+
     });
 
 program.parse(process.argv);
