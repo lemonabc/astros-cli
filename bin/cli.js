@@ -119,12 +119,12 @@ program
 
         // 判断是否存在 static.js
         var cfgFile;
-        try{
+        if(nodeFs.existsSync(nodePath.join(sitePath, 'config', 'static-build.js'))){
             cfgFile = require(nodePath.join(sitePath, 'config', 'static-build.js'));
-        }catch(error){
+        }else{
             // 兼容老项目
             cfgFile = require(nodePath.join(sitePath, 'config', 'static.js'));
-            cfgFile.middlewares = cfgFile.rel.middlewares || [];
+            cfgFile.middlewares = cfgFile.rel?cfgFile.rel.middlewares || []:[];
         }
 
         cfgFile.root = sitePath;
@@ -133,13 +133,9 @@ program
        
 
         if (options.html) {
-            var releaseHTML = require(nodePath.join(sitePath, 'node_modules', 'astros')).builderHTML;
-            var b = new releaseHTML(cfgFile);
-            b.build(function(){
-                console.log('发布成功');
-            })
-            return;
+            release = require(nodePath.join(sitePath, 'node_modules', 'astros')).builderHTML;
         }
+
         var b = new release(cfgFile);
         b.build(function(){
             console.log('发布成功');
